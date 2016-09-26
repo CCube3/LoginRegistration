@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login and Registration</title>
+
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Datepicker -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
+</head>
+
+<style media="screen">
+
+.error{
+  font-weight: lighter;
+  font-size: 11px;
+  color: red;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">Login & Registration</h1>
+            <br>
+        </div>
+        <br>
+        <div class='col-xs-4 col-xs-offset-1 well'>
+            <h3>Register</h3>
+            <br>
+
+            <!-- Registration Form -->
+            <form action='users/create' method='POST'>
+
+                <!-- Firstname -->
+                <div class='form-group'>
+                    <label for='email'>Firstname *
+                        {% with errors = get_flashed_messages(category_filter=["firstname"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                        <input class="form-control" type="text" name="firstname" id="name" placeholder="Firstname" />
+                </div><!-- End of "form-group"! -->
+
+                <!-- Lastname -->
+                <div class='form-group'>
+                    <label for='email'>Lastname *
+                        {% with errors = get_flashed_messages(category_filter=["lastname"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                        <input class="form-control" type="text" name="lastname" id="name" placeholder="Lastname"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Alias -->
+                <div class='form-group'>
+                    <label for='email'>Alias *
+                        {% with errors = get_flashed_messages(category_filter=["alias"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                        <input class="form-control" type="text" name="alias" id="name" placeholder="Alias"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Date of birth -->
+                <div class='form-group'>
+                    <label for='email'>Date of birth *
+                        {% with errors = get_flashed_messages(category_filter=["date_of_birth"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                        <input class="form-control" type="date" name="date_of_birth" id="datepicker" />
+                </div><!-- End of "form-group"!
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email *
+                        {% with errors = get_flashed_messages(category_filter=["email"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Email"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Password -->
+                <div  class="form-group">
+                    <label for="password">Password *
+                        {% with errors = get_flashed_messages(category_filter=["password"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Confirm password -->
+                <div class="form-group">
+                    <label for="passwordConfirm">Confirm Password *
+                        {% with errors = get_flashed_messages(category_filter=["pw_confirmation"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="password" name="pw_confirmation" id="passwordConfirm" placeholder="Confirm Password"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Registration submit button -->
+                <div class="form-group">
+                    <input class="btn btn-success pull-right" type="submit" value="Register" role="button" />
+                </div>
+
+                <!-- "These fields are required." text -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                    </div>
+                </div>
+            </form>
+        </div><!-- End of 'col-xs-4 col-xs-offset-1 well'! -->
+
+        <div class='col-xs-4 col-xs-offset-2 well'>
+            <h3>Login</h3>
+            <br>
+
+            <!-- Login form -->
+            <form action='/users/login' method='POST'>
+                <div class="form-group">
+
+                    <!-- Email -->
+                    <label>Email *
+                        {% with errors = get_flashed_messages(category_filter=["lg_email"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="email" name="email" placeholder="Email"/>
+                </div><!-- End of "form-group"! -->
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label>Password *
+                        {% with errors = get_flashed_messages(category_filter=["lg_password"]) %}
+                            {% if errors %}
+                                <span class="error">  {{ errors[0] }}</span>
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div><!-- End of "form-group"! -->
+
+                <!-- Login submit button -->
+                <div class="form-group">
+                    <input class="btn btn-success pull-right" type="submit" value="Login" role="button" />
+                </div><!-- End of "form-group"! -->
+
+                <!-- "These fields are required." text -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                    </div>
+                </div>
+            </form><!-- End of Login form -->
+        </div><!-- End of 'col-xs-4 col-xs-offset-2 well'! -->
+    </div><!-- End of "container"! -->
+</body>
+</html>
